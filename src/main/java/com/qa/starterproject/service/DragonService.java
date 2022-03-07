@@ -27,16 +27,16 @@ public class DragonService {
 		return this.repo.save(d);
 	}
 	// READ
-	public List<Dragon> readAll() {
+	public List<Dragon> getAll() {
 		return this.repo.findAll();
 	}
 	
-	public Dragon readById(long x) {
+	public Dragon getById(long x) {
 		return this.repo.findById(x).orElseThrow(() -> new EntityNotFoundException("Dragon not found"));
 	}
 	// UPDATE
 	public Dragon updateById(Dragon d, long x) {
-		Dragon updated = this.readById(x);
+		Dragon updated = this.getById(x);
 		updated.setName(d.getName());
 		updated.setSex(d.getSex());
 		updated.setColour(d.getColour());
@@ -50,7 +50,7 @@ public class DragonService {
 	
 	// DELETE
 	public String deleteById(long x) {
-		Dragon deleted = this.readById(x);
+		Dragon deleted = this.getById(x);
 		this.repo.deleteById(x);
 		return (deleted.getName() + " deleted at index " + x);
 	}
@@ -115,9 +115,14 @@ public class DragonService {
 	
 	// RENAME NEW OFFSPRING
 	public Dragon rename(long x, String name) {
-		Dragon updated = this.readById(x);
+		Dragon updated = this.getById(x);
 		updated.setName(name);
 		return this.repo.save(updated);
+	}
+	
+	// READ ALL OF GENERATION
+	public List<Dragon> getByGeneration(int generation) {
+		return this.repo.findDragonByGeneration(generation);
 	}
 	
 	

@@ -31,13 +31,13 @@ public class DragonController {
 	}
 	
 	@GetMapping("/readAll")
-	public ResponseEntity<List<Dragon>> getAll() {
-		return new ResponseEntity<List<Dragon>>(this.service.readAll(), HttpStatus.FOUND);
+	public ResponseEntity<List<Dragon>> readAll() {
+		return new ResponseEntity<List<Dragon>>(this.service.getAll(), HttpStatus.FOUND);
 	}
 	
 	@GetMapping("/read/{x}")
 	public ResponseEntity<Dragon> readById(@PathVariable long x) {
-		return new ResponseEntity<Dragon>(this.service.readById(x), HttpStatus.FOUND);
+		return new ResponseEntity<Dragon>(this.service.getById(x), HttpStatus.FOUND);
 	}
 	
 	@PutMapping("/update/{x}")
@@ -59,6 +59,11 @@ public class DragonController {
 	@PutMapping("/rename/{x}/{name}")
 	public ResponseEntity<Dragon> rename(@PathVariable long x, @PathVariable String name) {
 		return new ResponseEntity<Dragon>(this.service.rename(x, name), HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/readAllOfGeneration/{g}")
+	public ResponseEntity<List<Dragon>> readAllOfGeneration(@PathVariable int g) {
+		return new ResponseEntity<List<Dragon>>(this.service.getByGeneration(g), HttpStatus.FOUND);
 	}
 	
 }
