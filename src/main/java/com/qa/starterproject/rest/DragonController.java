@@ -29,7 +29,7 @@ public class DragonController {
 	public ResponseEntity<Dragon> create(@RequestBody Dragon d) {
 		return new ResponseEntity<Dragon>(this.service.create(d), HttpStatus.CREATED);
 	}
-	
+		
 	@GetMapping("/readAll")
 	public ResponseEntity<List<Dragon>> readAll() {
 		return new ResponseEntity<List<Dragon>>(this.service.getAll(), HttpStatus.FOUND);
@@ -51,6 +51,11 @@ public class DragonController {
 	}
 	
 	// ================ CUSTOM QUERIES ===================== //
+	@PostMapping("/createRandom/{name}/{sex}")
+	public ResponseEntity<Dragon> create(@PathVariable String name, @PathVariable String sex) {
+		return new ResponseEntity<Dragon>(this.service.createRandom(name, sex), HttpStatus.CREATED);
+	}
+	
 	@PostMapping("/breed/{a}/{b}")
 	public ResponseEntity<String> breedDragons(@PathVariable long a, @PathVariable long b) {
 		return new ResponseEntity<String>(this.service.breed(a, b), HttpStatus.CREATED);

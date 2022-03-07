@@ -1,6 +1,7 @@
 package com.qa.starterproject.service;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -26,6 +27,7 @@ public class DragonService {
 	public Dragon create(Dragon d) {
 		return this.repo.save(d);
 	}
+	
 	// READ
 	public List<Dragon> getAll() {
 		return this.repo.findAll();
@@ -34,6 +36,7 @@ public class DragonService {
 	public Dragon getById(long x) {
 		return this.repo.findById(x).orElseThrow(() -> new EntityNotFoundException("Dragon not found"));
 	}
+	
 	// UPDATE
 	public Dragon updateById(Dragon d, long x) {
 		Dragon updated = this.getById(x);
@@ -56,6 +59,18 @@ public class DragonService {
 	}
 	
 	// ================ CUSTOM QUERIES ===================== //
+	
+	String[] possibleColours = {"Red", "Blue", "Green", "Black", "White", "Pink", "Purple", "Orange", "Yellow", "Cyan"};
+	int randomColour;
+	
+	// CREATE WITH RANDOM VALUES
+	public Dragon createRandom(String name, String sex) {
+		Dragon d = new Dragon(name, sex);
+		randomColour = ThreadLocalRandom.current().nextInt(0, 10);	
+		d.setColour(possibleColours[randomColour]);
+		return this.repo.save(d);
+	}
+	
 	
 	// BREED TWO DRAGONS TOGETHER
 	public String breed(long a, long b) {
@@ -80,10 +95,13 @@ public class DragonService {
 			}
 			// inherit colour from either mother or father
 			random = Math.random() * max + min;
-			if (random >= 0.5) {
+			if (random <= 0.45) {
 				offspring.setColour(parentA.getColour());
-			} else {
+			} else if (random <= 0.9) {
 				offspring.setColour(parentB.getColour());
+			} else {
+				randomColour = ThreadLocalRandom.current().nextInt(0, 10);	
+				offspring.setColour(possibleColours[randomColour]);
 			}
 			// inherited values are the average of both parents and a random value (based on higher trait + 1)
 			min = 1;
@@ -124,6 +142,9 @@ public class DragonService {
 	public List<Dragon> getByGeneration(int generation) {
 		return this.repo.findDragonByGeneration(generation);
 	}
+	
+	// FIND BEST IN A CERTAIN TRAIT
+	
 	
 	
 	

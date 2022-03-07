@@ -1,5 +1,8 @@
 package com.qa.starterproject.persistence;
 
+import java.text.DecimalFormat;
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +18,6 @@ public class Dragon {
 	private String name;
 	private String sex;
 	private int generation = 1; // not defined in constructor, increments if created through breeding
-	
 	// inheritable traits
 	private String colour;
 	private double scaleQuality;
@@ -24,27 +26,43 @@ public class Dragon {
 	private double eggQuality;
 	private double breathTemperature;
 	
+	// for keeping doubles at 2 decimal places, for neatness
+	private static DecimalFormat df = new DecimalFormat("0.00");
+	
 	public Dragon() {}
 	
+	// constructor with set values
 	public Dragon(String name, String sex, String colour, double scaleQuality, double flyingSpeed,
 				  double eggSize, double eggQuality, double breathTemperature) {
 		super();
 		this.name = name;
 		this.sex = sex;
 		this.colour = colour;
-		this.scaleQuality= scaleQuality;
-		this.flyingSpeed = flyingSpeed;
-		this.eggSize = eggSize;
-		this.eggQuality = eggQuality;
-		this.breathTemperature = breathTemperature;
+		this.scaleQuality = Double.valueOf(df.format(scaleQuality));
+		this.flyingSpeed = Double.valueOf(df.format(flyingSpeed));
+		this.eggSize = Double.valueOf(df.format(eggSize));
+		this.eggQuality = Double.valueOf(df.format(eggQuality));
+		this.breathTemperature = Double.valueOf(df.format(breathTemperature));
 	}
-	
-	public Dragon(String name, String sex, String colour) {
+
+	// constructor with random values
+	public Dragon(String name, String sex) {
 		super();
 		this.name = name;
 		this.sex = sex;
-		this.colour = colour;
-		// I want a constructor which randomises the other values WORK OUT LATER
+		
+		double min = 1;
+		double max = 3;
+		double random = Math.random() * max + min;
+		this.scaleQuality = Double.valueOf(df.format(random));
+		random = Math.random() * max + min;
+		this.flyingSpeed = Double.valueOf(df.format(random));
+		random = Math.random() * max + min;
+		this.eggSize = Double.valueOf(df.format(random));
+		random = Math.random() * max + min;
+		this.eggQuality = Double.valueOf(df.format(random));
+		random = Math.random() * max + min;
+		this.breathTemperature = Double.valueOf(df.format(random));
 	}
 
 	// ===== setters / getters ===== //
@@ -88,35 +106,35 @@ public class Dragon {
 		return scaleQuality;
 	}
 	public void setScaleQuality(double scaleQuality) {
-		this.scaleQuality = scaleQuality;
+		this.scaleQuality = Double.valueOf(df.format(scaleQuality));
 	}
 
 	public double getFlyingSpeed() {
 		return flyingSpeed;
 	}
 	public void setFlyingSpeed(double flyingSpeed) {
-		this.flyingSpeed = flyingSpeed;
+		this.flyingSpeed = Double.valueOf(df.format(flyingSpeed));
 	}
 
 	public double getEggSize() {
 		return eggSize;
 	}
 	public void setEggSize(double eggSize) {
-		this.eggSize = eggSize;
+		this.eggSize = Double.valueOf(df.format(eggSize));
 	}
 
 	public double getEggQuality() {
 		return eggQuality;
 	}
 	public void setEggQuality(double eggQuality) {
-		this.eggQuality = eggQuality;
+		this.eggQuality = Double.valueOf(df.format(eggQuality));
 	}
 
 	public double getBreathTemperature() {
 		return breathTemperature;
 	}
 	public void setBreathTemperature(double breathTemperature) {
-		this.breathTemperature = breathTemperature;
+		this.breathTemperature = Double.valueOf(df.format(breathTemperature));
 	}
 	
 	
