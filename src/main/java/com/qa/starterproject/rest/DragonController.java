@@ -42,7 +42,7 @@ public class DragonController {
 	
 	@PutMapping("/update/{x}")
 	public ResponseEntity<Dragon> updateDragon(@RequestBody Dragon d, @PathVariable long x) {
-		return new ResponseEntity<Dragon>(this.service.updateById(d, x), HttpStatus.OK);
+		return new ResponseEntity<Dragon>(this.service.updateById(d, x), HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/delete/{x}")
@@ -54,6 +54,11 @@ public class DragonController {
 	@PostMapping("/breed/{a}/{b}")
 	public ResponseEntity<String> breedDragons(@PathVariable long a, @PathVariable long b) {
 		return new ResponseEntity<String>(this.service.breed(a, b), HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/rename/{x}/{name}")
+	public ResponseEntity<Dragon> rename(@PathVariable long x, @PathVariable String name) {
+		return new ResponseEntity<Dragon>(this.service.rename(x, name), HttpStatus.ACCEPTED);
 	}
 	
 }

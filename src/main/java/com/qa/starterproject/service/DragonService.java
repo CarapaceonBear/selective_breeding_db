@@ -74,9 +74,9 @@ public class DragonService {
 			double max = 1;
 			double random = Math.random() * max + min;
 			if (random >= 0.5) {
-				offspring.setSex("male");
+				offspring.setSex("Male");
 			} else {
-				offspring.setSex("female");
+				offspring.setSex("Female");
 			}
 			// inherit colour from either mother or father
 			random = Math.random() * max + min;
@@ -109,8 +109,15 @@ public class DragonService {
 			offspring.setBreathTemperature((parentA.getBreathTemperature() + parentB.getBreathTemperature() + random) / 3);
 			
 			this.repo.save(offspring);
-			return ("New dragon born, saved at index " + this.repo.findTopByOrderByIdDesc().getId());
+			return ("New dragon born, a " + offspring.getSex() + ", saved at index " + this.repo.findTopByOrderByIdDesc().getId());
 		}
+	}
+	
+	// RENAME NEW OFFSPRING
+	public Dragon rename(long x, String name) {
+		Dragon updated = this.readById(x);
+		updated.setName(name);
+		return this.repo.save(updated);
 	}
 	
 	
