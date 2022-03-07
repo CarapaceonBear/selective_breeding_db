@@ -49,4 +49,11 @@ public class DragonController {
 	public ResponseEntity<String> deleteDragon(@PathVariable long x) {
 		return new ResponseEntity<String>(this.service.deleteById(x), HttpStatus.ACCEPTED);
 	}
+	
+	// ================ CUSTOM QUERIES ===================== //
+	@PostMapping("/breed/{a}/{b}")
+	public ResponseEntity<String> breedDragons(@PathVariable long a, @PathVariable long b) {
+		return new ResponseEntity<String>(this.service.breed(a, b), HttpStatus.CREATED);
+	}
+	
 }
