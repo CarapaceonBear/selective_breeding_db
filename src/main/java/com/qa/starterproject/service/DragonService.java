@@ -33,6 +33,18 @@ public class DragonService {
 		return this.repo.findById(x).orElseThrow(() -> new EntityNotFoundException("Dragon not found"));
 	}
 	// UPDATE
+	public Dragon updateById(Dragon d, long x) {
+		Dragon updated = this.readById(x);
+		updated.setName(d.getName());
+		updated.setSex(d.getSex());
+		updated.setColour(d.getColour());
+		updated.setScaleQuality(d.getScaleQuality());
+		updated.setFlyingSpeed(d.getFlyingSpeed());
+		updated.setEggSize(d.getEggSize());
+		updated.setEggQuality(d.getEggQuality());
+		updated.setBreathTemperature(d.getBreathTemperature());
+		return this.repo.save(updated);
+	}
 	
 	// DELETE
 }
