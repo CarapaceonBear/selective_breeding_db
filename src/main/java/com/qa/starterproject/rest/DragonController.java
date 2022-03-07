@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,8 @@ public class DragonController {
 		return new ResponseEntity<Dragon>(this.service.updateById(d, x), HttpStatus.OK);
 	}
 	
-	//@DeleteMapping("/delete")
-	//
+	@DeleteMapping("/delete/{x}")
+	public ResponseEntity<String> deleteDragon(@PathVariable long x) {
+		return new ResponseEntity<String>(this.service.deleteById(x), HttpStatus.ACCEPTED);
+	}
 }

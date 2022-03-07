@@ -47,4 +47,10 @@ public class DragonService {
 	}
 	
 	// DELETE
+	public String deleteById(long x) {
+		Dragon deleted = this.readById(x);
+		this.repo.deleteById(x);
+		return (deleted.getName() + " deleted at index " + x);
+	}
+	
 }
