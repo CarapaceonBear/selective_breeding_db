@@ -1,5 +1,6 @@
 package com.qa.starterproject.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -58,6 +59,12 @@ public class DragonService {
 		return (deleted.getName() + " deleted at index " + x);
 	}
 	
+	public String clearDb() {
+		long x = this.repo.count();
+		this.repo.deleteAll();
+		return ("Database cleared. " + x + " entities removed.");
+	}
+	
 	// ================ CUSTOM QUERIES ===================== //
 	
 	String[] possibleColours = {"Red", "Blue", "Green", "Black", "White", "Pink", "Purple", "Orange", "Yellow", "Cyan"};
@@ -79,6 +86,8 @@ public class DragonService {
 		if ((parentA.getSex().equals("Male") && parentB.getSex().equals("Male")) ||
 			(parentA.getSex().equals("Female") && parentB.getSex().equals("Female"))) {
 			return ("Dragons not breedable (same sex)");
+		} else if (parentA.getGeneration() != parentB.getGeneration()) {
+			return ("Dragons not breedable (different generations)");
 		} else {
 			// create blank offspring entry
 			Dragon offspring = new Dragon();
@@ -116,8 +125,7 @@ public class DragonService {
 			max = (Math.max(parentA.getEggSize(), parentB.getEggSize())) + 1;
 			random = Math.random() * max + min;
 			offspring.setEggSize((parentA.getEggSize() + parentB.getEggSize() + random) / 3);
-			
-			
+				
 			max = (Math.max(parentA.getEggQuality(), parentB.getEggQuality())) + 1;
 			random = Math.random() * max + min;
 			offspring.setEggQuality((parentA.getEggQuality() + parentB.getEggQuality() + random) / 3);
@@ -144,10 +152,107 @@ public class DragonService {
 	}
 	
 	// FIND BEST IN A CERTAIN TRAIT
+	public List<Dragon> getBestOfScaleQuality() {
+		return this.repo.findTop10ByOrderByScaleQualityDesc();
+	}
+	public List<Dragon> getBestOfFlyingSpeed() {
+		return this.repo.findTop10ByOrderByFlyingSpeedDesc();
+	}
+	public List<Dragon> getBestOfEggSize() {
+		return this.repo.findTop10ByOrderByEggSizeDesc();
+	}
+	public List<Dragon> getBestOfEggQuality() {
+		return this.repo.findTop10ByOrderByEggQualityDesc();
+	}
+	public List<Dragon> getBestOfBreathTemperature() {
+		return this.repo.findTop10ByOrderByBreathTemperatureDesc();
+	}
 	
-	
-	
-	
+	// FIND BEST BREEDING PAIR FOR CERTAIN TRAIT
+	// first match the trait passed from the query
+	// then iterate through the relevant top10, getting the top match for each entry
+	public List<String> getIdealPairs(String trait) {
+		List<String> pair = new ArrayList<String>();
+		List<Dragon> candidates = new ArrayList<Dragon>();
+		switch (trait) {
+		case "scaleQuality":
+			candidates = this.repo.findTop10ByOrderByScaleQualityDesc();
+			for (int i = 0; i < candidates.size(); i++) {
+				for (int j = (i + 1); j < candidates.size(); j++) {
+					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
+						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
+					{
+						pair.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
+								 ", Quality: " + candidates.get(i).getScaleQuality() + " / " +
+								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
+								 ", Quality: " + candidates.get(j).getScaleQuality());
+						break;
+					} else { continue; }
+					}}
+			break;
+		case "flyingSpeed":
+			candidates = this.repo.findTop10ByOrderByFlyingSpeedDesc();
+			for (int i = 0; i < candidates.size(); i++) {
+				for (int j = (i + 1); j < candidates.size(); j++) {
+					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
+						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
+					{
+						pair.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
+								 ", Speed: " + candidates.get(i).getFlyingSpeed() + " / " +
+								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
+								 ", Speed: " + candidates.get(j).getFlyingSpeed());
+						break;
+					} else { continue; }
+					}}
+			break;
+		case "eggSize":
+			candidates = this.repo.findTop10ByOrderByEggSizeDesc();
+			for (int i = 0; i < candidates.size(); i++) {
+				for (int j = (i + 1); j < candidates.size(); j++) {
+					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
+						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
+					{
+						pair.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
+								 ", Size: " + candidates.get(i).getEggSize() + " / " +
+								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
+								 ", Size: " + candidates.get(j).getEggSize());
+						break;
+					} else { continue; }
+					}}
+			break;
+		case "eggQuality":
+			candidates = this.repo.findTop10ByOrderByEggQualityDesc();
+			for (int i = 0; i < candidates.size(); i++) {
+				for (int j = (i + 1); j < candidates.size(); j++) {
+					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
+						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
+					{
+						pair.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
+								 ", Quality: " + candidates.get(i).getEggQuality() + " / " +
+								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
+								 ", Quality: " + candidates.get(j).getEggQuality());
+						break;
+					} else { continue; }
+					}}
+			break;
+		case "breathTemperature":
+			candidates = this.repo.findTop10ByOrderByBreathTemperatureDesc();
+			for (int i = 0; i < candidates.size(); i++) {
+				for (int j = (i + 1); j < candidates.size(); j++) {
+					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
+						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
+					{
+						pair.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
+								 ", Temperature: " + candidates.get(i).getBreathTemperature() + " / " +
+								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
+								 ", Temperature: " + candidates.get(j).getBreathTemperature());
+						break;
+					} else { continue; }
+					}}
+			break;
+		}
+		return pair;
+	}
 	
 	
 }
