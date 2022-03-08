@@ -50,6 +50,11 @@ public class DragonController {
 		return new ResponseEntity<String>(this.service.deleteById(x), HttpStatus.ACCEPTED);
 	}
 	
+	@DeleteMapping("/clearDb")
+	public ResponseEntity<String> clearDb() {
+		return new ResponseEntity<String>(this.service.clearDb(), HttpStatus.ACCEPTED);
+	}
+	
 	// ================ CUSTOM QUERIES ===================== //
 	@PostMapping("/createRandom/{name}/{sex}")
 	public ResponseEntity<Dragon> create(@PathVariable String name, @PathVariable String sex) {
@@ -74,18 +79,22 @@ public class DragonController {
 	@GetMapping("/readBestOfScaleQuality")
 	public ResponseEntity<List<Dragon>> readBestOfScaleQuality() {
 		return new ResponseEntity<List<Dragon>>(this.service.getBestOfScaleQuality(), HttpStatus.FOUND);}
-	@GetMapping("readBestOfFlyingSpeed")
+	@GetMapping("/readBestOfFlyingSpeed")
 	public ResponseEntity<List<Dragon>> readBestOfFlyingSpeed() {
 		return new ResponseEntity<List<Dragon>>(this.service.getBestOfFlyingSpeed(), HttpStatus.FOUND);}
-	@GetMapping("readBestOfEggSize")
+	@GetMapping("/readBestOfEggSize")
 	public ResponseEntity<List<Dragon>> readBestOfEggSize() {
 		return new ResponseEntity<List<Dragon>>(this.service.getBestOfEggSize(), HttpStatus.FOUND);}
-	@GetMapping("readBestOfEggQuality")
+	@GetMapping("/readBestOfEggQuality")
 	public ResponseEntity<List<Dragon>> readBestOfEggQuality() {
 		return new ResponseEntity<List<Dragon>>(this.service.getBestOfEggQuality(), HttpStatus.FOUND);}
-	@GetMapping("readBestOfBreathTemperature")
+	@GetMapping("/readBestOfBreathTemperature")
 	public ResponseEntity<List<Dragon>> readBestOfBreathTemperature() {
 		return new ResponseEntity<List<Dragon>>(this.service.getBestOfBreathTemperature(), HttpStatus.FOUND);}
 	
-
+	@GetMapping("/readIdealPairs/{trait}")
+	public ResponseEntity<List<String>> readIdealPairs(@PathVariable String trait) {
+		return new ResponseEntity<List<String>>(this.service.getIdealPairs(trait), HttpStatus.FOUND);
+	}
+	
 }

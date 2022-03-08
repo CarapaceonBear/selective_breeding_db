@@ -15,10 +15,10 @@ public interface DragonRepository extends JpaRepository <Dragon, Long> {
 	List<Dragon> findDragonByGeneration(int generation);
 	
 	// return top 5 in a given trait
-	List<Dragon> findTop5ByOrderByScaleQualityDesc();
-	List<Dragon> findTop5ByOrderByFlyingSpeedDesc();
-	List<Dragon> findTop5ByOrderByEggSizeDesc();
-	List<Dragon> findTop5ByOrderByEggQualityDesc();
-	List<Dragon> findTop5ByOrderByBreathTemperatureDesc();
+	List<Dragon> findTop10ByOrderByScaleQualityDesc();
+	List<Dragon> findTop10ByOrderByFlyingSpeedDesc();
+	List<Dragon> findTop10ByOrderByEggSizeDesc();
+	List<Dragon> findTop10ByOrderByEggQualityDesc();
+	List<Dragon> findTop10ByOrderByBreathTemperatureDesc();
 	
 }
