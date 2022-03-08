@@ -62,6 +62,21 @@ public class Dragon {
 		random = Math.random() * max + min;
 		this.breathTemperature = Double.valueOf(df.format(random));
 	}
+	
+	// full constructor, for testing
+	public Dragon(Long id, int generation, String name, String sex, String colour, double scaleQuality,
+				  double flyingSpeed, double eggSize, double eggQuality, double breathTemperature) {
+		this.id = id;
+		this.generation = generation;
+		this.name = name;
+		this.sex = sex;
+		this.colour = colour;
+		this.scaleQuality = scaleQuality;
+		this.flyingSpeed = flyingSpeed;
+		this.eggSize = eggSize;
+		this.eggQuality = eggQuality;
+		this.breathTemperature = breathTemperature;
+	}
 
 	// ===== setters / getters ===== //
 	
