@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.PersistenceException;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,10 +75,11 @@ public class DragonServiceUnitTest {
 	}
 	
 	//UPDATE
+	// not working yet
 	@Test
 	void updateByIdTest() {
 		//GIVEN
-		long id = 1L;
+		long id = 1;
 		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
 		Dragon update = new Dragon("Example2", "Female", "Blue", 2.0, 3.0, 4.0, 3.0, 2.0);
 		Dragon y = new Dragon(1L, 1, "Example2", "Female", "Blue", 2.0, 3.0, 4.0, 3.0, 2.0);
@@ -88,6 +91,23 @@ public class DragonServiceUnitTest {
 		//Verify
 		Mockito.verify(this.repo, Mockito.times(1)).findById(Mockito.anyLong());
 		Mockito.verify(this.repo, Mockito.times(1)).save(Mockito.any(Dragon.class));
+	}
+	
+	//DELETE
+	@Test
+	void deleteById() {
+		//GIVEN
+		long id = 1;
+		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		//WHEN
+		Mockito.when(this.repo.findById(id)).thenReturn(Optional.of(x));
+		// need to work out what is happening here
+		//Mockito.doThrow(new PersistenceException("blank")).when(this.repo).deleteById(id);
+		//THEN
+		assertThat(this.service.deleteById(id)).isNotBlank();
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).deleteById(Mockito.anyLong());
+		Mockito.verify(this.repo, Mockito.times(1)).existsById(Mockito.anyLong());
 	}
 	
 }
