@@ -144,10 +144,21 @@ public class DragonService {
 	}
 	
 	// FIND BEST IN A CERTAIN TRAIT
-	
-	
-	
-	
+	public List<Dragon> getBestOfScaleQuality() {
+		return this.repo.findTop5ByOrderByScaleQualityDesc();
+	}
+	public List<Dragon> getBestOfFlyingSpeed() {
+		return this.repo.findTop5ByOrderByFlyingSpeedDesc();
+	}
+	public List<Dragon> getBestOfEggSize() {
+		return this.repo.findTop5ByOrderByEggSizeDesc();
+	}
+	public List<Dragon> getBestOfEggQuality() {
+		return this.repo.findTop5ByOrderByEggQualityDesc();
+	}
+	public List<Dragon> getBestOfBreathTemperature() {
+		return this.repo.findTop5ByOrderByBreathTemperatureDesc();
+	}
 	
 	
 }

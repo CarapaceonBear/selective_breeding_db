@@ -71,4 +71,21 @@ public class DragonController {
 		return new ResponseEntity<List<Dragon>>(this.service.getByGeneration(g), HttpStatus.FOUND);
 	}
 	
+	@GetMapping("/readBestOfScaleQuality")
+	public ResponseEntity<List<Dragon>> readBestOfScaleQuality() {
+		return new ResponseEntity<List<Dragon>>(this.service.getBestOfScaleQuality(), HttpStatus.FOUND);}
+	@GetMapping("readBestOfFlyingSpeed")
+	public ResponseEntity<List<Dragon>> readBestOfFlyingSpeed() {
+		return new ResponseEntity<List<Dragon>>(this.service.getBestOfFlyingSpeed(), HttpStatus.FOUND);}
+	@GetMapping("readBestOfEggSize")
+	public ResponseEntity<List<Dragon>> readBestOfEggSize() {
+		return new ResponseEntity<List<Dragon>>(this.service.getBestOfEggSize(), HttpStatus.FOUND);}
+	@GetMapping("readBestOfEggQuality")
+	public ResponseEntity<List<Dragon>> readBestOfEggQuality() {
+		return new ResponseEntity<List<Dragon>>(this.service.getBestOfEggQuality(), HttpStatus.FOUND);}
+	@GetMapping("readBestOfBreathTemperature")
+	public ResponseEntity<List<Dragon>> readBestOfBreathTemperature() {
+		return new ResponseEntity<List<Dragon>>(this.service.getBestOfBreathTemperature(), HttpStatus.FOUND);}
+	
+
 }

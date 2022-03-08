@@ -1,8 +1,6 @@
 package com.qa.starterproject.persistence;
 
 import java.text.DecimalFormat;
-import java.util.concurrent.ThreadLocalRandom;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

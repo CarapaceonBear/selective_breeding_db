@@ -14,4 +14,11 @@ public interface DragonRepository extends JpaRepository <Dragon, Long> {
 	// return all entries in a given geration
 	List<Dragon> findDragonByGeneration(int generation);
 	
+	// return top 5 in a given trait
+	List<Dragon> findTop5ByOrderByScaleQualityDesc();
+	List<Dragon> findTop5ByOrderByFlyingSpeedDesc();
+	List<Dragon> findTop5ByOrderByEggSizeDesc();
+	List<Dragon> findTop5ByOrderByEggQualityDesc();
+	List<Dragon> findTop5ByOrderByBreathTemperatureDesc();
+	
 }
