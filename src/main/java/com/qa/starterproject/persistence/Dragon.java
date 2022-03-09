@@ -1,6 +1,8 @@
 package com.qa.starterproject.persistence;
 
 import java.text.DecimalFormat;
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -149,6 +151,41 @@ public class Dragon {
 	public void setBreathTemperature(double breathTemperature) {
 		this.breathTemperature = Double.valueOf(df.format(breathTemperature));
 	}
+
+	@Override
+	public String toString() {
+		return "Dragon [id=" + id + ", name=" + name + ", sex=" + sex + ", generation=" + generation + ", colour="
+				+ colour + ", scaleQuality=" + scaleQuality + ", flyingSpeed=" + flyingSpeed + ", eggSize=" + eggSize
+				+ ", eggQuality=" + eggQuality + ", breathTemperature=" + breathTemperature + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(breathTemperature, colour, eggQuality, eggSize, flyingSpeed, generation, id, name,
+				scaleQuality, sex);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Dragon other = (Dragon) obj;
+		return Double.doubleToLongBits(breathTemperature) == Double.doubleToLongBits(other.breathTemperature)
+				&& Objects.equals(colour, other.colour)
+				&& Double.doubleToLongBits(eggQuality) == Double.doubleToLongBits(other.eggQuality)
+				&& Double.doubleToLongBits(eggSize) == Double.doubleToLongBits(other.eggSize)
+				&& Double.doubleToLongBits(flyingSpeed) == Double.doubleToLongBits(other.flyingSpeed)
+				&& generation == other.generation && id == other.id && Objects.equals(name, other.name)
+				&& Double.doubleToLongBits(scaleQuality) == Double.doubleToLongBits(other.scaleQuality)
+				&& Objects.equals(sex, other.sex);
+	}
+	
+	
+	
 	
 	
 	
