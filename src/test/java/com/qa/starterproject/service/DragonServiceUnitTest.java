@@ -348,7 +348,7 @@ public class DragonServiceUnitTest {
 		String trait = "scaleQuality";
 		List<String> pairs = new ArrayList<String>();
 		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
-		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Female", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
 		List<Dragon> candidates = new ArrayList<Dragon>();
 		candidates.add(y);
 		candidates.add(z);
@@ -372,7 +372,7 @@ public class DragonServiceUnitTest {
 		String trait = "flyingSpeed";
 		List<String> pairs = new ArrayList<String>();
 		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
-		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Female", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
 		List<Dragon> candidates = new ArrayList<Dragon>();
 		candidates.add(y);
 		candidates.add(z);
@@ -396,7 +396,7 @@ public class DragonServiceUnitTest {
 		String trait = "eggSize";
 		List<String> pairs = new ArrayList<String>();
 		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
-		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Female", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
 		List<Dragon> candidates = new ArrayList<Dragon>();
 		candidates.add(y);
 		candidates.add(z);
@@ -420,7 +420,7 @@ public class DragonServiceUnitTest {
 		String trait = "eggQuality";
 		List<String> pairs = new ArrayList<String>();
 		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
-		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Female", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
 		List<Dragon> candidates = new ArrayList<Dragon>();
 		candidates.add(y);
 		candidates.add(z);
@@ -444,7 +444,7 @@ public class DragonServiceUnitTest {
 		String trait = "breathTemperature";
 		List<String> pairs = new ArrayList<String>();
 		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
-		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Female", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
 		List<Dragon> candidates = new ArrayList<Dragon>();
 		candidates.add(y);
 		candidates.add(z);
