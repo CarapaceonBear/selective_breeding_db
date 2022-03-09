@@ -3,6 +3,8 @@ package com.qa.starterproject.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -243,6 +245,96 @@ public class DragonServiceUnitTest {
 		assertThat(this.service.getByGeneration(generation)).isEqualTo(list);
 		//Verify
 		Mockito.verify(this.repo, Mockito.times(1)).findDragonByGeneration(Mockito.anyInt());
+	}
+	
+	@Test
+	void getBestOfScaleQualityTest() {
+		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		List<Dragon> list = new ArrayList<Dragon>();
+		list.add(x);
+		list.add(y);
+		list.add(z);
+		list.sort(Comparator.comparing(Dragon::getScaleQuality).reversed());
+		//WHEN
+		Mockito.when(this.repo.findTop10ByOrderByScaleQualityDesc()).thenReturn(list);
+		//THEN
+		assertThat(this.service.getBestOfScaleQuality()).isEqualTo(list);
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findTop10ByOrderByScaleQualityDesc();
+	}
+	
+	@Test
+	void getBestOfFlyingSpeed() {
+		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		List<Dragon> list = new ArrayList<Dragon>();
+		list.add(x);
+		list.add(y);
+		list.add(z);
+		list.sort(Comparator.comparing(Dragon::getFlyingSpeed).reversed());
+		//WHEN
+		Mockito.when(this.repo.findTop10ByOrderByFlyingSpeedDesc()).thenReturn(list);
+		//THEN
+		assertThat(this.service.getBestOfFlyingSpeed()).isEqualTo(list);
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findTop10ByOrderByFlyingSpeedDesc();
+	}
+	
+	@Test
+	void getBestOfEggSize() {
+		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		List<Dragon> list = new ArrayList<Dragon>();
+		list.add(x);
+		list.add(y);
+		list.add(z);
+		list.sort(Comparator.comparing(Dragon::getEggSize).reversed());
+		//WHEN
+		Mockito.when(this.repo.findTop10ByOrderByEggSizeDesc()).thenReturn(list);
+		//THEN
+		assertThat(this.service.getBestOfEggSize()).isEqualTo(list);
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findTop10ByOrderByEggSizeDesc();
+	}
+	
+	@Test
+	void getBestOfEggQuality() {
+		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		List<Dragon> list = new ArrayList<Dragon>();
+		list.add(x);
+		list.add(y);
+		list.add(z);
+		list.sort(Comparator.comparing(Dragon::getEggQuality).reversed());
+		//WHEN
+		Mockito.when(this.repo.findTop10ByOrderByEggQualityDesc()).thenReturn(list);
+		//THEN
+		assertThat(this.service.getBestOfEggQuality()).isEqualTo(list);
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findTop10ByOrderByEggQualityDesc();
+	}
+	
+	@Test
+	void getBestOfBreathTemperature() {
+		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		List<Dragon> list = new ArrayList<Dragon>();
+		list.add(x);
+		list.add(y);
+		list.add(z);
+		list.sort(Comparator.comparing(Dragon::getBreathTemperature).reversed());
+		//WHEN
+		Mockito.when(this.repo.findTop10ByOrderByBreathTemperatureDesc()).thenReturn(list);
+		//THEN
+		assertThat(this.service.getBestOfBreathTemperature()).isEqualTo(list);
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findTop10ByOrderByBreathTemperatureDesc();
 	}
 	
 	

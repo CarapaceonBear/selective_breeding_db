@@ -127,7 +127,7 @@ public class DragonService {
 		return this.repo.findTop10ByOrderByBreathTemperatureDesc();
 	}
 	
-	// FIND BEST BREEDING PAIR FOR CERTAIN TRAIT
+	// FIND BEST BREEDING PAIRS FOR CERTAIN TRAIT
 	// first match the trait passed from the query
 	// then iterate through the relevant top10, getting the top match for each entry
 	public List<String> getIdealPairs(String trait) {
