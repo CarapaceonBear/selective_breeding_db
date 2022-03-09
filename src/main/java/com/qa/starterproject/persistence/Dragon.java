@@ -152,6 +152,8 @@ public class Dragon {
 		this.breathTemperature = Double.valueOf(df.format(breathTemperature));
 	}
 
+	
+	// overrides, for testing
 	@Override
 	public String toString() {
 		return "Dragon [id=" + id + ", name=" + name + ", sex=" + sex + ", generation=" + generation + ", colour="
