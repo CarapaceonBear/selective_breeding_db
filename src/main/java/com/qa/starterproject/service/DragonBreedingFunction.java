@@ -1,5 +1,6 @@
 package com.qa.starterproject.service;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Component;
@@ -69,5 +70,81 @@ public class DragonBreedingFunction {
 		return offspring;
 	}
 	
-	
+	public List<String> getPairs(String trait, List<String> pairs, List<Dragon> candidates) {
+		// first match the trait passed from the query
+		// then iterate through the relevant top10, getting the top match for each entry
+		switch (trait) {
+		case "scaleQuality":
+			for (int i = 0; i < candidates.size(); i++) {
+				for (int j = (i + 1); j < candidates.size(); j++) {
+					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
+						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
+					{
+						pairs.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
+								 ", Quality: " + candidates.get(i).getScaleQuality() + " / " +
+								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
+								 ", Quality: " + candidates.get(j).getScaleQuality());
+						break;
+					} else { continue; }
+					}}
+			break;
+		case "flyingSpeed":
+			for (int i = 0; i < candidates.size(); i++) {
+				for (int j = (i + 1); j < candidates.size(); j++) {
+					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
+						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
+					{
+						pairs.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
+								 ", Speed: " + candidates.get(i).getFlyingSpeed() + " / " +
+								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
+								 ", Speed: " + candidates.get(j).getFlyingSpeed());
+						break;
+					} else { continue; }
+					}}
+			break;
+		case "eggSize":
+			for (int i = 0; i < candidates.size(); i++) {
+				for (int j = (i + 1); j < candidates.size(); j++) {
+					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
+						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
+					{
+						pairs.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
+								 ", Size: " + candidates.get(i).getEggSize() + " / " +
+								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
+								 ", Size: " + candidates.get(j).getEggSize());
+						break;
+					} else { continue; }
+					}}
+			break;
+		case "eggQuality":
+			for (int i = 0; i < candidates.size(); i++) {
+				for (int j = (i + 1); j < candidates.size(); j++) {
+					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
+						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
+					{
+						pairs.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
+								 ", Quality: " + candidates.get(i).getEggQuality() + " / " +
+								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
+								 ", Quality: " + candidates.get(j).getEggQuality());
+						break;
+					} else { continue; }
+					}}
+			break;
+		case "breathTemperature":
+			for (int i = 0; i < candidates.size(); i++) {
+				for (int j = (i + 1); j < candidates.size(); j++) {
+					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
+						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
+					{
+						pairs.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
+								 ", Temperature: " + candidates.get(i).getBreathTemperature() + " / " +
+								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
+								 ", Temperature: " + candidates.get(j).getBreathTemperature());
+						break;
+					} else { continue; }
+					}}
+			break;
+		}
+		return pairs;
+	}
 }

@@ -3,7 +3,6 @@ package com.qa.starterproject.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -231,6 +230,7 @@ public class DragonServiceUnitTest {
 	
 	@Test
 	void getByGenerationTest() {
+		//GIVEN
 		int generation = 2;
 		Dragon x = new Dragon(1L, 2, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
 		Dragon y = new Dragon(2L, 2, "Example2", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
@@ -249,6 +249,7 @@ public class DragonServiceUnitTest {
 	
 	@Test
 	void getBestOfScaleQualityTest() {
+		//GIVEN
 		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
 		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
 		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
@@ -266,7 +267,8 @@ public class DragonServiceUnitTest {
 	}
 	
 	@Test
-	void getBestOfFlyingSpeed() {
+	void getBestOfFlyingSpeedTest() {
+		//GIVEN
 		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
 		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
 		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
@@ -284,7 +286,8 @@ public class DragonServiceUnitTest {
 	}
 	
 	@Test
-	void getBestOfEggSize() {
+	void getBestOfEggSizeTest() {
+		//GIVEN
 		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
 		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
 		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
@@ -302,7 +305,8 @@ public class DragonServiceUnitTest {
 	}
 	
 	@Test
-	void getBestOfEggQuality() {
+	void getBestOfEggQualityTest() {
+		//GIVEN
 		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
 		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
 		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
@@ -320,7 +324,8 @@ public class DragonServiceUnitTest {
 	}
 	
 	@Test
-	void getBestOfBreathTemperature() {
+	void getBestOfBreathTemperatureTest() {
+		//GIVEN
 		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
 		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
 		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
@@ -337,21 +342,123 @@ public class DragonServiceUnitTest {
 		Mockito.verify(this.repo, Mockito.times(1)).findTop10ByOrderByBreathTemperatureDesc();
 	}
 	
+	@Test
+	void getIdealPairsTest1() {
+		//GIVEN
+		String trait = "scaleQuality";
+		List<String> pairs = new ArrayList<String>();
+		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		List<Dragon> candidates = new ArrayList<Dragon>();
+		candidates.add(y);
+		candidates.add(z);
+		candidates.sort(Comparator.comparing(Dragon::getScaleQuality).reversed());
+		List<String> pairsOutput = new ArrayList<String>();
+		pairsOutput.add("ID: 3, Example3, Quality: 4.0 / ID: 2, Example2, Quality: 3.0");
+		//WHEN
+		Mockito.when(this.repo.findTop10ByOrderByScaleQualityDesc()).thenReturn(candidates);
+		Mockito.when(this.breedFunction.getPairs(trait, pairs, candidates)).thenReturn(pairsOutput);
+		//THEN
+		assertThat(this.service.getIdealPairs(trait).equals(pairsOutput));
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findTop10ByOrderByScaleQualityDesc();
+		Mockito.verify(this.breedFunction, Mockito.times(1))
+					   .getPairs(Mockito.anyString(), Mockito.anyList(), Mockito.anyList());
+	}
 	
+	@Test
+	void getIdealPairsTest2() {
+		//GIVEN
+		String trait = "flyingSpeed";
+		List<String> pairs = new ArrayList<String>();
+		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		List<Dragon> candidates = new ArrayList<Dragon>();
+		candidates.add(y);
+		candidates.add(z);
+		candidates.sort(Comparator.comparing(Dragon::getFlyingSpeed).reversed());
+		List<String> pairsOutput = new ArrayList<String>();
+		pairsOutput.add("ID: 3, Example3, Quality: 4.0 / ID: 2, Example2, Quality: 3.0");
+		//WHEN
+		Mockito.when(this.repo.findTop10ByOrderByFlyingSpeedDesc()).thenReturn(candidates);
+		Mockito.when(this.breedFunction.getPairs(trait, pairs, candidates)).thenReturn(pairsOutput);
+		//THEN
+		assertThat(this.service.getIdealPairs(trait).equals(pairsOutput));
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findTop10ByOrderByFlyingSpeedDesc();
+		Mockito.verify(this.breedFunction, Mockito.times(1))
+					   .getPairs(Mockito.anyString(), Mockito.anyList(), Mockito.anyList());
+	}
 	
+	@Test
+	void getIdealPairsTest3() {
+		//GIVEN
+		String trait = "eggSize";
+		List<String> pairs = new ArrayList<String>();
+		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		List<Dragon> candidates = new ArrayList<Dragon>();
+		candidates.add(y);
+		candidates.add(z);
+		candidates.sort(Comparator.comparing(Dragon::getEggSize).reversed());
+		List<String> pairsOutput = new ArrayList<String>();
+		pairsOutput.add("ID: 3, Example3, Quality: 4.0 / ID: 2, Example2, Quality: 3.0");
+		//WHEN
+		Mockito.when(this.repo.findTop10ByOrderByEggSizeDesc()).thenReturn(candidates);
+		Mockito.when(this.breedFunction.getPairs(trait, pairs, candidates)).thenReturn(pairsOutput);
+		//THEN
+		assertThat(this.service.getIdealPairs(trait).equals(pairsOutput));
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findTop10ByOrderByEggSizeDesc();
+		Mockito.verify(this.breedFunction, Mockito.times(1))
+					   .getPairs(Mockito.anyString(), Mockito.anyList(), Mockito.anyList());
+	}
 	
+	@Test
+	void getIdealPairsTest4() {
+		//GIVEN
+		String trait = "eggQuality";
+		List<String> pairs = new ArrayList<String>();
+		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		List<Dragon> candidates = new ArrayList<Dragon>();
+		candidates.add(y);
+		candidates.add(z);
+		candidates.sort(Comparator.comparing(Dragon::getEggQuality).reversed());
+		List<String> pairsOutput = new ArrayList<String>();
+		pairsOutput.add("ID: 3, Example3, Quality: 4.0 / ID: 2, Example2, Quality: 3.0");
+		//WHEN
+		Mockito.when(this.repo.findTop10ByOrderByEggQualityDesc()).thenReturn(candidates);
+		Mockito.when(this.breedFunction.getPairs(trait, pairs, candidates)).thenReturn(pairsOutput);
+		//THEN
+		assertThat(this.service.getIdealPairs(trait).equals(pairsOutput));
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findTop10ByOrderByEggQualityDesc();
+		Mockito.verify(this.breedFunction, Mockito.times(1))
+					   .getPairs(Mockito.anyString(), Mockito.anyList(), Mockito.anyList());
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Test
+	void getIdealPairsTest5() {
+		//GIVEN
+		String trait = "breathTemperature";
+		List<String> pairs = new ArrayList<String>();
+		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 3.0, 3.0, 3.0, 3.0, 3.0);
+		Dragon z = new Dragon(3L, 1, "Example3", "Male", "Red", 4.0, 4.0, 4.0, 4.0, 4.0);
+		List<Dragon> candidates = new ArrayList<Dragon>();
+		candidates.add(y);
+		candidates.add(z);
+		candidates.sort(Comparator.comparing(Dragon::getBreathTemperature).reversed());
+		List<String> pairsOutput = new ArrayList<String>();
+		pairsOutput.add("ID: 3, Example3, Quality: 4.0 / ID: 2, Example2, Quality: 3.0");
+		//WHEN
+		Mockito.when(this.repo.findTop10ByOrderByBreathTemperatureDesc()).thenReturn(candidates);
+		Mockito.when(this.breedFunction.getPairs(trait, pairs, candidates)).thenReturn(pairsOutput);
+		//THEN
+		assertThat(this.service.getIdealPairs(trait).equals(pairsOutput));
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findTop10ByOrderByBreathTemperatureDesc();
+		Mockito.verify(this.breedFunction, Mockito.times(1))
+					   .getPairs(Mockito.anyString(), Mockito.anyList(), Mockito.anyList());
+	}	
 }

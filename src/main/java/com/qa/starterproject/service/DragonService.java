@@ -128,90 +128,27 @@ public class DragonService {
 	}
 	
 	// FIND BEST BREEDING PAIRS FOR CERTAIN TRAIT
-	// first match the trait passed from the query
-	// then iterate through the relevant top10, getting the top match for each entry
 	public List<String> getIdealPairs(String trait) {
-		List<String> pair = new ArrayList<String>();
+		List<String> pairs = new ArrayList<String>();
 		List<Dragon> candidates = new ArrayList<Dragon>();
 		switch (trait) {
 		case "scaleQuality":
 			candidates = this.repo.findTop10ByOrderByScaleQualityDesc();
-			for (int i = 0; i < candidates.size(); i++) {
-				for (int j = (i + 1); j < candidates.size(); j++) {
-					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
-						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
-					{
-						pair.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
-								 ", Quality: " + candidates.get(i).getScaleQuality() + " / " +
-								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
-								 ", Quality: " + candidates.get(j).getScaleQuality());
-						break;
-					} else { continue; }
-					}}
 			break;
 		case "flyingSpeed":
 			candidates = this.repo.findTop10ByOrderByFlyingSpeedDesc();
-			for (int i = 0; i < candidates.size(); i++) {
-				for (int j = (i + 1); j < candidates.size(); j++) {
-					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
-						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
-					{
-						pair.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
-								 ", Speed: " + candidates.get(i).getFlyingSpeed() + " / " +
-								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
-								 ", Speed: " + candidates.get(j).getFlyingSpeed());
-						break;
-					} else { continue; }
-					}}
 			break;
 		case "eggSize":
 			candidates = this.repo.findTop10ByOrderByEggSizeDesc();
-			for (int i = 0; i < candidates.size(); i++) {
-				for (int j = (i + 1); j < candidates.size(); j++) {
-					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
-						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
-					{
-						pair.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
-								 ", Size: " + candidates.get(i).getEggSize() + " / " +
-								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
-								 ", Size: " + candidates.get(j).getEggSize());
-						break;
-					} else { continue; }
-					}}
 			break;
 		case "eggQuality":
 			candidates = this.repo.findTop10ByOrderByEggQualityDesc();
-			for (int i = 0; i < candidates.size(); i++) {
-				for (int j = (i + 1); j < candidates.size(); j++) {
-					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
-						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
-					{
-						pair.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
-								 ", Quality: " + candidates.get(i).getEggQuality() + " / " +
-								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
-								 ", Quality: " + candidates.get(j).getEggQuality());
-						break;
-					} else { continue; }
-					}}
 			break;
 		case "breathTemperature":
 			candidates = this.repo.findTop10ByOrderByBreathTemperatureDesc();
-			for (int i = 0; i < candidates.size(); i++) {
-				for (int j = (i + 1); j < candidates.size(); j++) {
-					if ((candidates.get(i).getGeneration() == candidates.get(j).getGeneration()) && 
-						(! candidates.get(i).getSex().equals(candidates.get(j).getSex()))) 
-					{
-						pair.add("ID: " + candidates.get(i).getId() + ", " + candidates.get(i).getName() + 
-								 ", Temperature: " + candidates.get(i).getBreathTemperature() + " / " +
-								 "ID: " + candidates.get(j).getId() + ", " + candidates.get(j).getName() + 
-								 ", Temperature: " + candidates.get(j).getBreathTemperature());
-						break;
-					} else { continue; }
-					}}
 			break;
 		}
-		return pair;
+		pairs = breedFunction.getPairs(trait, pairs, candidates);
+		return pairs;
 	}
-	
-	
 }
