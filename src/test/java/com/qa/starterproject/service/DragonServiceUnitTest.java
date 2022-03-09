@@ -24,6 +24,9 @@ public class DragonServiceUnitTest {
 	@MockBean
 	private DragonRepository repo;
 	
+	@MockBean
+	private DragonBreedingFunction breedFunction;
+		
 	// =================== BASIC CRUD ====================== //
 	
 	// CREATE
@@ -126,5 +129,102 @@ public class DragonServiceUnitTest {
 		Mockito.verify(this.repo, Mockito.times(1)).count();
 		Mockito.verify(this.repo, Mockito.times(1)).deleteAll();
 	}
+	
+	// ================ CUSTOM QUERIES ===================== //
+	
+	@Test
+	void createRandomTest() {
+		//GIVEN
+		String name = "Example";
+		String sex = "Male";
+		Dragon x = new Dragon(1L, 1, "Example", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		//WHEN
+		Mockito.when(this.repo.save(Mockito.any(Dragon.class))).thenReturn(x);
+		//THEN
+		assertThat(this.service.createRandom(name, sex)).isEqualTo(x);
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).save(Mockito.any(Dragon.class));
+	}
+	
+	@Test
+	void breedTest() {
+		//GIVEN
+		long xId = 1;
+		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		long yId = 2;
+		Dragon y = new Dragon(2L, 1, "Example2", "Female", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		Dragon xy = new Dragon(3L, 2, "unnamed", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		String viableMessage = "viable";
+		//WHEN
+		Mockito.when(this.repo.findById(xId)).thenReturn(Optional.of(x));
+		Mockito.when(this.repo.findById(yId)).thenReturn(Optional.of(y));
+		Mockito.when(this.breedFunction.checkViable(x, y)).thenReturn(viableMessage);
+		Mockito.when(this.breedFunction.breed(x, y)).thenReturn(xy);
+		Mockito.when(this.repo.save(Mockito.any(Dragon.class))).thenReturn(xy);
+		Mockito.when(this.repo.findTopByOrderByIdDesc()).thenReturn(xy);
+		//THEN
+		assertThat(this.service.breed(xId, yId)).isNotBlank();
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(2)).findById(Mockito.anyLong());
+		Mockito.verify(this.breedFunction, Mockito.times(1)).checkViable(Mockito.any(Dragon.class), Mockito.any(Dragon.class));
+		Mockito.verify(this.breedFunction, Mockito.times(1)).breed(Mockito.any(Dragon.class), Mockito.any(Dragon.class));
+		Mockito.verify(this.repo, Mockito.times(1)).save(Mockito.any(Dragon.class));
+		Mockito.verify(this.repo, Mockito.times(1)).findTopByOrderByIdDesc();
+	}
+	
+	@Test
+	void breedTestFailure1() {
+		//GIVEN
+		long xId = 1;
+		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		long yId = 2;
+		Dragon y = new Dragon(2L, 1, "Example2", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		String viableMessage = "Dragons not breedable (same sex)";
+		//WHEN
+		Mockito.when(this.repo.findById(xId)).thenReturn(Optional.of(x));
+		Mockito.when(this.repo.findById(yId)).thenReturn(Optional.of(y));
+		Mockito.when(this.breedFunction.checkViable(x, y)).thenReturn(viableMessage);
+		//THEN
+		assertThat(this.service.breed(xId, yId)).isNotBlank();
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(2)).findById(Mockito.anyLong());
+		Mockito.verify(this.breedFunction, Mockito.times(1)).checkViable(Mockito.any(Dragon.class), Mockito.any(Dragon.class));
+	}
+	
+	@Test
+	void breedTestFailure2() {
+		//GIVEN
+		long xId = 1;
+		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		long yId = 2;
+		Dragon y = new Dragon(2L, 2, "Example2", "Female", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		String viableMessage = "Dragons not breedable (different generations)";
+		//WHEN
+		Mockito.when(this.repo.findById(xId)).thenReturn(Optional.of(x));
+		Mockito.when(this.repo.findById(yId)).thenReturn(Optional.of(y));
+		Mockito.when(this.breedFunction.checkViable(x, y)).thenReturn(viableMessage);
+		//THEN
+		assertThat(this.service.breed(xId, yId)).isNotBlank();
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(2)).findById(Mockito.anyLong());
+		Mockito.verify(this.breedFunction, Mockito.times(1)).checkViable(Mockito.any(Dragon.class), Mockito.any(Dragon.class));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
