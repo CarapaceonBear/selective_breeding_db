@@ -210,6 +210,41 @@ public class DragonServiceUnitTest {
 		Mockito.verify(this.breedFunction, Mockito.times(1)).checkViable(Mockito.any(Dragon.class), Mockito.any(Dragon.class));
 	}
 	
+	@Test
+	void renameTest() {
+		//GIVEN
+		long id = 1;
+		String name = "Example2";
+		Dragon x = new Dragon(1L, 1, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		Dragon y = new Dragon(1L, 1, "Example2", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		//WHEN
+		Mockito.when(this.repo.findById(id)).thenReturn(Optional.of(x));
+		Mockito.when(this.repo.save(y)).thenReturn(y);
+		//THEN
+		assertThat(this.service.rename(id, name)).isEqualTo(y);
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findById(Mockito.anyLong());
+		Mockito.verify(this.repo, Mockito.times(1)).save(Mockito.any(Dragon.class));
+	}
+	
+	@Test
+	void getByGenerationTest() {
+		int generation = 2;
+		Dragon x = new Dragon(1L, 2, "Example1", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		Dragon y = new Dragon(2L, 2, "Example2", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		Dragon z = new Dragon(3L, 2, "Example3", "Male", "Red", 2.0, 2.0, 2.0, 2.0, 2.0);
+		List<Dragon> list = new ArrayList<Dragon>();
+		list.add(x);
+		list.add(y);
+		list.add(z);
+		//WHEN
+		Mockito.when(this.repo.findDragonByGeneration(generation)).thenReturn(list);
+		//THEN
+		assertThat(this.service.getByGeneration(generation)).isEqualTo(list);
+		//Verify
+		Mockito.verify(this.repo, Mockito.times(1)).findDragonByGeneration(Mockito.anyInt());
+	}
+	
 	
 	
 	
