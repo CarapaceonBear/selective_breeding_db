@@ -21,6 +21,9 @@ I'm keeping up with regular version control, and upkeep of my Jira board.<br>
 The next couple of days are for writing tests.<br>
 This leaves the final day for any stretch goals, and for readying the project for submission - compiled build, tidied repo, filled-in readme.<br>
 #### End of project thoughts:
+I'm happy with the functionality of my code, I have achieved what I set out to do.<br>
+Testing was tricky, but I achieved significant coverage. It was worth alotting extra time for it in my plan.<br>
+I feel the project demonstrates well my understanding of the course topics, at least those directly relevant.
 
  -----------------------------------------------------------------------------------------------
 ### What went well?
