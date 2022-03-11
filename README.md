@@ -23,26 +23,42 @@ This leaves the final day for any stretch goals, and for readying the project fo
 #### End of project thoughts:
 I'm happy with the functionality of my code, I have achieved what I set out to do.<br>
 Testing was tricky, but I achieved significant coverage. It was worth alotting extra time for it in my plan.<br>
-I feel the project demonstrates well my understanding of the course topics, at least those directly relevant.
-
+My stretch-goals were a bit idealistic, in areas I wasn't already familiar, and not realistic within the timeframe<br>
+I feel the project demonstrates well my understanding of the course topics.<br>
  -----------------------------------------------------------------------------------------------
 ### What went well?
- -
- -
+ - I judged my speed well during the planning stage, with reasonable story points. This meant that I closely followed the plan I set out.
+ - Coding core functionality was comfortable for me, and I am pleased with the end results.
+ - For all the time it took, testing was successful. I have a stronger understanding than when I started this week.
 ### What didn't go as planned?
- -
- -
+ - There were some topics that I hadn't understood as well as I thought, such as building .jar files, so took some extra time.
+ - Some concepts, like risk assessments, were touched on very early in the course, so I had to take some extra time to revise them.
  -----------------------------------------------------------------------------------------------
 ## Possible improvements for future revisions of the project
-
+ - I started to break complex queries into separate classes, for better Single Responsibility, and this could be taken further.
+ - In terms of version control, I should have used more branches, for individual features. Instead to pulling to main, each feature should have been pulled to a develop branch.
+ - DTOs could be incorporated, as they are a 'stretch goal' in the project specifications, though we didn't have time to cover them in the course, so some extra time is required to familiarise myself with them.
 
 -----------------------------------------------------------------------------------------------
 ## Screenshots
-
 https://drive.google.com/drive/folders/1tdwfow1zg0aZ0IRv9v6Lu3jhbpKdzJre?usp=sharing
-Included are screenshots of Postman queries, and Workbench showing persistence.
+Included:
+ - Jira usage, part-way through the project
+ - Postman queries
+ - Test coverage, of unit and integration tests together
+ - Workbench showing persistence
 
 -----------------------------------------------------------------------------------------------
 Jira Board:
 https://wsmithqa.atlassian.net/jira/software/projects/SBD/boards/2
+
+-----------------------------------------------------------------------------------------------
+## Risk Assessment
+| Description | Evaluation | Likelihood | Impact Level | Responsibility | Response | Control Measures |
+| ----------- | ---------- | ---------- | ------------ | -------------- | -------- | ---------------- |
+| Inaccurate story points in project plan | Project overruns deadline | Medium | High | Project planner | Re-evaluate project priorities | Revise story points at regular intervals |
+| Development PC breaks | Short delay / day's work lost | Low | Low | Developer | Switch to new device | Have alternative device in ready (laptop) |
+| Eye-strain, back pain | Effect on developer health | Low | Medium | Developer | Reduce workload | Take regular short breaks |
+| Procrastination / Distraction | Slow work | Medium | Medium | Developer | Change work environment | Reduce distractions |
+
 

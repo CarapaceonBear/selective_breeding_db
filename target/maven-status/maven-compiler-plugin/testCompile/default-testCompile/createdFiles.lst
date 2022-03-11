@@ -1,0 +1,4 @@
+com\qa\starterproject\service\DragonBreedingFunctionTest.class
+com\qa\starterproject\service\DragonServiceUnitTest.class
+com\qa\starterproject\SelectiveBreedingDbApplicationTests.class
+com\qa\starterproject\rest\DragonControllerIntegrationTest.class

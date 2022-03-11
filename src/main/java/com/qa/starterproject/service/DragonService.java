@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.qa.starterproject.exception.DragonNotFoundException;
 import com.qa.starterproject.persistence.Dragon;
 import com.qa.starterproject.persistence.DragonRepository;
 
@@ -38,7 +37,7 @@ public class DragonService {
 	}
 	
 	public Dragon getById(long x) {
-		return this.repo.findById(x).orElseThrow(() -> new EntityNotFoundException("Dragon not found"));
+		return this.repo.findById(x).orElseThrow(DragonNotFoundException::new);
 	}
 	
 	// UPDATE
