@@ -24,7 +24,7 @@ This leaves the final day for any stretch goals, and for readying the project fo
 I'm happy with the functionality of my code, I have achieved what I set out to do.<br>
 Testing was tricky, but I achieved significant coverage. It was worth alotting extra time for it in my plan.<br>
 My stretch-goals were a bit idealistic, in areas I wasn't already familiar, and not realistic within the timeframe<br>
-I feel the project demonstrates well my understanding of the course topics.
+I feel the project demonstrates well my understanding of the course topics.<br>
  -----------------------------------------------------------------------------------------------
 ### What went well?
  - I judged my speed well during the planning stage, with reasonable story points. This meant that I closely followed the plan I set out.
@@ -37,7 +37,7 @@ I feel the project demonstrates well my understanding of the course topics.
 ## Possible improvements for future revisions of the project
  - I started to break complex queries into separate classes, for better Single Responsibility, and this could be taken further.
  - In terms of version control, I should have used more branches, for individual features. Instead to pulling to main, each feature should have been pulled to a develop branch.
- - 
+ - DTOs could be incorporated, as they are a 'stretch goal' in the project specifications, though we didn't have time to cover them in the course, so some extra time is required to familiarise myself with them.
 
 -----------------------------------------------------------------------------------------------
 ## Screenshots
