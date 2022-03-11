@@ -41,7 +41,6 @@ I feel the project demonstrates well my understanding of the course topics.<br>
 
 -----------------------------------------------------------------------------------------------
 ## Screenshots
-
 https://drive.google.com/drive/folders/1tdwfow1zg0aZ0IRv9v6Lu3jhbpKdzJre?usp=sharing
 Included:
  - Jira usage, part-way through the project
@@ -52,4 +51,14 @@ Included:
 -----------------------------------------------------------------------------------------------
 Jira Board:
 https://wsmithqa.atlassian.net/jira/software/projects/SBD/boards/2
+
+-----------------------------------------------------------------------------------------------
+## Risk Assessment
+| Description | Evaluation | Likelihood | Impact Level | Responsibility | Response | Control Measures |
+| ----------- | ---------- | ---------- | ------------ | -------------- | -------- | ---------------- |
+| Inaccurate story points in project plan | Project overruns deadline | Medium | High | Project planner | Re-evaluate project priorities | Revise story points at regular intervals |
+| Development PC breaks | Short delay / day's work lost | Low | Low | Developer | Switch to new device | Have alternative device in ready (laptop) |
+| Eye-strain, back pain | Effect on developer health | Low | Medium | Developer | Reduce workload | Take regular short breaks |
+| Procrastination / Distraction | Slow work | Medium | Medium | Developer | Change work environment | Reduce distractions |
+
 
