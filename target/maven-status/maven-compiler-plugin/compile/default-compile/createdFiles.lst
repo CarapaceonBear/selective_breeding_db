@@ -1,0 +1,6 @@
+com\qa\starterproject\rest\DragonController.class
+com\qa\starterproject\service\DragonService.class
+com\qa\starterproject\SelectiveBreedingDbApplication.class
+com\qa\starterproject\service\DragonBreedingFunction.class
+com\qa\starterproject\persistence\Dragon.class
+com\qa\starterproject\persistence\DragonRepository.class
