@@ -4,3 +4,4 @@ com\qa\starterproject\SelectiveBreedingDbApplication.class
 com\qa\starterproject\service\DragonBreedingFunction.class
 com\qa\starterproject\persistence\Dragon.class
 com\qa\starterproject\persistence\DragonRepository.class
+com\qa\starterproject\exception\DragonNotFoundException.class
